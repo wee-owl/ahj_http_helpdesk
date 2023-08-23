@@ -59,6 +59,7 @@ export default class HelpDesk {
       e.preventDefault();
       this.form.addTicket();
       this.formListener(null, 'create');
+      this.addBtn.blur();
     });
   }
 
@@ -73,6 +74,7 @@ export default class HelpDesk {
           this.form.editTicket(value.name, value.description);
           this.formListener(data.id, 'update');
         });
+      e.target.closest('.item__btn-edit').blur();
     });
   }
 
@@ -90,6 +92,7 @@ export default class HelpDesk {
           this.closeForm();
         }
       });
+      e.target.closest('.item__btn-delete').blur();
     });
   }
 
@@ -100,7 +103,7 @@ export default class HelpDesk {
         const ticketName = this.form.popup.querySelector('#short-desc').value;
         const ticketDesc = this.form.popup.querySelector('#detail-desc').value;
 
-        if (!ticketName) {
+        if (!ticketName.trim()) {
           this.form.popup.remove();
           return;
         }
